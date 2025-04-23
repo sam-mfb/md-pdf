@@ -8,7 +8,7 @@ import {
   ParagraphElement, 
   HeadingElement, 
   HeadingLevel, 
-  PDFParsingError 
+  createPDFParsingError 
 } from './types.js';
 import { logger } from '../utils/logger.js';
 
@@ -42,6 +42,6 @@ export async function parsePdf(pdfBuffer: Buffer): Promise<Document> {
       elements: [],
     };
   } catch (error) {
-    throw new PDFParsingError('Failed to parse PDF content', error);
+    throw createPDFParsingError('Failed to parse PDF content', error);
   }
 }

@@ -1,6 +1,6 @@
 import fs from 'fs-extra';
 import path from 'path';
-import { FileOperationError } from '../pdf-md/types.js';
+import { createFileOperationError } from '../pdf-md/types.js';
 
 /**
  * Check if a file exists
@@ -21,7 +21,7 @@ export async function readFile(filePath: string): Promise<Buffer> {
   try {
     return await fs.readFile(filePath);
   } catch (error) {
-    throw new FileOperationError(`Failed to read file: ${filePath}`, filePath, error);
+    throw createFileOperationError(`Failed to read file: ${filePath}`, filePath, error);
   }
 }
 
@@ -34,7 +34,7 @@ export async function writeFile(filePath: string, content: string): Promise<void
     await fs.ensureDir(dir);
     await fs.writeFile(filePath, content);
   } catch (error) {
-    throw new FileOperationError(`Failed to write file: ${filePath}`, filePath, error);
+    throw createFileOperationError(`Failed to write file: ${filePath}`, filePath, error);
   }
 }
 

@@ -152,31 +152,60 @@ export const DEFAULT_CONVERSION_OPTIONS: ConversionOptions = {
 };
 
 /**
- * PDF parsing error
+ * PDF parsing error type
  */
-export class PDFParsingError extends Error {
-  constructor(message: string, public readonly cause?: unknown) {
-    super(message);
-    this.name = 'PDFParsingError';
-  }
-}
+export type PDFParsingError = {
+  name: 'PDFParsingError';
+  message: string;
+  cause?: unknown;
+};
 
 /**
- * Markdown formatting error
+ * Create a PDF parsing error
  */
-export class MarkdownFormattingError extends Error {
-  constructor(message: string, public readonly cause?: unknown) {
-    super(message);
-    this.name = 'MarkdownFormattingError';
-  }
-}
+export const createPDFParsingError = (message: string, cause?: unknown): PDFParsingError & Error => {
+  const error = new Error(message) as PDFParsingError & Error;
+  error.name = 'PDFParsingError';
+  error.cause = cause;
+  return error;
+};
 
 /**
- * File operation error
+ * Markdown formatting error type
  */
-export class FileOperationError extends Error {
-  constructor(message: string, public readonly path: string, public readonly cause?: unknown) {
-    super(message);
-    this.name = 'FileOperationError';
-  }
-}
+export type MarkdownFormattingError = {
+  name: 'MarkdownFormattingError';
+  message: string;
+  cause?: unknown;
+};
+
+/**
+ * Create a markdown formatting error
+ */
+export const createMarkdownFormattingError = (message: string, cause?: unknown): MarkdownFormattingError & Error => {
+  const error = new Error(message) as MarkdownFormattingError & Error;
+  error.name = 'MarkdownFormattingError';
+  error.cause = cause;
+  return error;
+};
+
+/**
+ * File operation error type
+ */
+export type FileOperationError = {
+  name: 'FileOperationError';
+  message: string;
+  path: string;
+  cause?: unknown;
+};
+
+/**
+ * Create a file operation error
+ */
+export const createFileOperationError = (message: string, path: string, cause?: unknown): FileOperationError & Error => {
+  const error = new Error(message) as FileOperationError & Error;
+  error.name = 'FileOperationError';
+  error.path = path;
+  error.cause = cause;
+  return error;
+};

@@ -11,7 +11,7 @@ import {
   LinkElement,
   ConversionOptions,
   DEFAULT_CONVERSION_OPTIONS,
-  MarkdownFormattingError 
+  createMarkdownFormattingError 
 } from './types.js';
 import { logger } from '../utils/logger.js';
 
@@ -41,7 +41,7 @@ export function formatToMarkdown(
     
     return markdown.trim();
   } catch (error) {
-    throw new MarkdownFormattingError('Failed to format document to Markdown', error);
+    throw createMarkdownFormattingError('Failed to format document to Markdown', error);
   }
 }
 
